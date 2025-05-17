@@ -12,9 +12,9 @@ A straightforward Telegram bot built with Python.
 . Python 3.6+
 . Install <span style="color: red;"> pyTelegramBotAPI</span>:
 
-    ```
-    pip install pyTelegramBotAPI
-    ```
+```
+pip install pyTelegramBotAPI
+```
 ## setup & Run
 ### 1. Setup Environment
 . Create and activate a virtual environment:
