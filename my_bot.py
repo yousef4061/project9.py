@@ -76,13 +76,14 @@ def process_name(message):
 def process_age(message, name):
     age = int(message.text)
     if message.chat.id not in players:
-        players[message.chat.id] = players(name, age)     
+        p = player(name, age)
+        players[message.chat.id] = p     
         bot.send_message(message.chat.id, f"chat ID لطفا: {message.chat.id}")
-        bot.send_message(message.chat.id, f"بازیکن ذخیره شد: {player.name}, {player.age}")
-        bot.send_message(message.chat.id, player.new_game())
-        bot.send_message(message.chat.id, f"Voice: {player.voice}")
-        bot.send_message(message.chat.id, f"Max: {player.max}")
-        bot.send_message(message.chat.id, f"Argmax: {player.argmax}")
+        bot.send_message(message.chat.id, f"بازیکن ذخیره شد: {p.name}, {p.age}")
+        bot.send_message(message.chat.id, p.new_game())
+        bot.send_message(message.chat.id, f"Voice: {p.voice}")
+        bot.send_message(message.chat.id, f"Max: {p.max}")
+        bot.send_message(message.chat.id, f"Argmax: {p.argmax}")
 
 
 @bot.message_handler(commands=['voice'])
@@ -120,6 +121,15 @@ def send_argmax(message):
     else:
         bot.send_message(message.chat.id, "/game لطفا اول اسم و سنت رو وارد کن ل")
 
+@bot.message_handler(commands=['photo'])
+def sendP_photo(message):
+    if message.text == "عکس":
+        bot.reply_to(message, "عکس قدی خودت")
+    else:
+        pgoto = open("session9/khoshgel.jpg", "rb")
+        bot.send_photo(message.chat.id, pgoto)
+    bot.send_message(message.chat.id, "عکس ارسال شد", reply_markup=my_keyboard)
+          
 @bot.message_handler(commands=['help'])
 def help(message):
     help_text = """
@@ -143,7 +153,7 @@ def send_all(message):
     elif message.text == "دوست دارم":
         bot.reply_to(message, "🧡")
     elif message.text == "عکس قدی بده":
-         photo = open("session9/khoshgel", "rb")
+         photo = open("session9/khoshgel.jpg", "rb")
          bot.send_photo(message.chat.id, photo)
     else:
         bot.send_message(message.chat.id, "نمیفهمم چی داری میگی😐", reply_markup=my_keyboard)
